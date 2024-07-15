@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://s0v8ue2otqm6"]
+
+[ext_resource type="Texture2D" uid="uid://xogponwbe8x4" path="res://art/enemyFlyingAlt_1.png" id="1_1cny1"]
+[ext_resource type="Script" path="res://mob.gd" id="1_dltns"]
+[ext_resource type="Texture2D" uid="uid://bh71b81ps4t1f" path="res://art/enemyFlyingAlt_2.png" id="2_j7qh6"]
+[ext_resource type="Texture2D" uid="uid://d3887sqqd2yfv" path="res://art/enemySwimming_1.png" id="3_bo3e2"]
+[ext_resource type="Texture2D" uid="uid://78bln25kn272" path="res://art/enemySwimming_2.png" id="4_sop8u"]
+[ext_resource type="Texture2D" uid="uid://cajmt3na5r3c6" path="res://art/enemyWalking_1.png" id="5_nt6pa"]
+[ext_resource type="Texture2D" uid="uid://ce7md3vmc0xar" path="res://art/enemyWalking_2.png" id="6_6eqpn"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4yr5c"]
+radius = 40.0
+height = 150.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ml42l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1cny1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_j7qh6")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_bo3e2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_sop8u")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_nt6pa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_6eqpn")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 3.0
+}]
+
+[node name="RigidBody2D" type="RigidBody2D" groups=["mobs"]]
+mass = 0.26
+gravity_scale = 0.0
+script = ExtResource("1_dltns")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 0
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_4yr5c")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_ml42l")
+animation = &"walk"
+frame_progress = 0.243044
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
