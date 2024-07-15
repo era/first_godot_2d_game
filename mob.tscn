@@ -9,8 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://ce7md3vmc0xar" path="res://art/enemyWalking_2.png" id="6_6eqpn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4yr5c"]
-radius = 40.0
-height = 150.0
+radius = 37.0
+height = 100.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ml42l"]
 animations = [{
@@ -48,8 +48,8 @@ animations = [{
 "speed": 3.0
 }]
 
-[node name="RigidBody2D" type="RigidBody2D" groups=["mobs"]]
-mass = 0.26
+[node name="RigidBody2D" type="RigidDynamicBody2D" groups=["mobs"]]
+collision_mask = 0
 gravity_scale = 0.0
 script = ExtResource("1_dltns")
 
